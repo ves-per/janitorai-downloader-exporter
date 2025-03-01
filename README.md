@@ -1,6 +1,5 @@
 # JanitorAI Chat Downloader, Reader & Exporter
 ### ver.1.6.3
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) 
 
 ![ss01](https://github.com/user-attachments/assets/10b2b9ed-8139-4ca6-b4a3-9ba5e7aae08a) ![ss02](https://github.com/user-attachments/assets/e7c805f8-b9a2-4d8a-994d-8a0be9b201d4)
 
