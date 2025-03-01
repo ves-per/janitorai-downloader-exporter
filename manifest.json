@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "JanitorAI Chat Downloader, Reader & Exporter",
+  "version": "1.6.3",
+  "description": "Add download & export buttons on JanitorAI. Download chats, read offline and export as epub, txt, md & SillyTavern chat with ease.",
+  "action": {
+    "default_icon": {
+      "16": "images/16.png",
+      "48": "images/48.png",
+      "128": "images/128.png"
+    }
+  },
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+    "host_permissions": [
+    "https://janitorai.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.janitorai.com/*"
+      ],
+      "js": [
+
+        "scripts/content.js",
+		"scripts/jszip.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "scripts/script.js",
+        "scripts/jszip.min.js",
+		"injected.js",
+        "images/demo.jpg",
+        "images/export.png",
+        "images/export-hover.png",
+		"index.html"
+      ],
+      "matches": [
+        "*://*.janitorai.com/*",
+        "file://*/*"
+      ]
+    }
+  ]
+}

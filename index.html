@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<!-- index.html v.1.6.3 --!>
+
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="application-name" content="Janitor Chat Archive Reader & Exporter">
+	<meta name="author" content="Berry The Light">
+	<meta name="description" content="Download chats from JanitorAI, read offline and export as ePub, txt, markdown, SillyTavern chat format with ease">
+    <title>JanitorAI Chat Archive Reader & Exporter</title>
+    <link rel="stylesheet" href="style.css">
+	<script type="module" src="scripts/jszip.min.js"></script>
+	<script src="scripts/content.js"></script>
+</head>
+
+<body>
+    <!-- Title Section -->
+    <div id="title-name" class="fade-in fade-in-delay-1">
+        <h1>Chat Archive Reader & Exporter</h1>
+        <h2>// for JanitorAI</h2>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="menu-container fade-in fade-in-delay-1" id="menu">
+        <!-- SVG for the menu button -->
+        <div id="menuToggle">
+            <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <rect width="32" height="4" y="6"></rect>
+                <rect width="32" height="4" y="14"></rect>
+                <rect width="32" height="4" y="22"></rect>
+            </svg>
+        </div>
+		
+        <div class="toggle-wrapper">
+            <div class="menu-content">
+                <div class="flex-container">
+                    <div class="instruction">
+                        <h2>Instructions</h2>
+                        <h3>1. Download Chat Archive</h3>
+                        <p>On your JanitorAI chat page, click the "Download Chat" button
+						<br>This will download a chat archive (.json)</br>
+                            <h3>2. Open Chat Archive
+							<p>Use the below "Open Chat Archive" button to open chat archive
+                            <h3>3. Input Persona Name
+							<p>Enter your persona name on the right
+							<h3>4. Export
+							<p>Click the icon next to the menu button <br>Select the desired export option
+                        </p>
+                        <div class="json-open">
+                            <!-- Button to open JSON file -->
+                            <div class="config-button-container">
+                                <label for="jsonFileInput" class="gradientButton">Open Chat Archive</label>
+                                <input type="file" id="jsonFileInput" accept=".json" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Avatar Settings Section -->
+                    <div class="avatar-settings">
+                        <h3 style='font-size: 20px; margin-bottom:0;'>Persona Name <input type="text" class="persona-field" id="userName" size="14" placeholder="Enter Persona Name" autocomplete="off" /></h3>
+						<p style="font-size:11px; line-height:0px; margin-bottom:30px;">Please enter your persona name to allow this tool to work properly.</p>
+
+                        <div id="avatar-header">
+                            <h2>Avatar</h2>
+                        </div>
+                        <label class="form-switch">
+                            <input type="checkbox" id="toggleAvatarCheckbox" checked />
+                            <i></i>
+                        </label>
+
+                        <div id="panelContainer" class="panel-container">
+                            <div class="radio-select">
+                                <label>
+                                    <input type="radio" name="avatarInputType" value="upload" checked> Upload Image
+                                </label>
+                                <label>
+                                    <input type="radio" name="avatarInputType" value="url"> Enter Image URL
+                                </label>
+                            </div>
+
+                            <!-- Persona Avatar Upload -->
+                            <label for="userAvatar" id="userAvatar">
+                                <h3>Persona Avatar</h3>
+                            </label>
+                            <div class="inputs-container">
+                                <div id="uploadUser" style="display: block;">
+                                    <div class="config-button-container">
+                                        <label for="userAvatarFile" class="upload-button">Upload</label>
+                                        <input type="file" id="userAvatarFile" accept=".jpg, .jpeg, .png, .webp, .gif" style="display:none;">
+                                    </div>
+                                </div>
+                                <div id="urlUser" style="display: none;">
+                                    <input type="text" id="userAvatarUrl" placeholder="Enter Persona image URL" class="avatar-url">
+                                </div>
+                            </div>
+
+                            <!-- Bot Avatar Upload -->
+                            <label for="charAvatar" id="charAvatar">
+                                <h3>Bot Avatar</h3>
+                            </label>
+                            <div id="uploadChar" style="display: block;">
+                                <div class="config-button-container">
+                                    <label for="charAvatarFile" class="upload-button">Upload</label>
+                                    <input type="file" id="charAvatarFile" accept=".jpg, .jpeg, .png, .webp, .gif" style="display:none;">
+                                </div>
+                            </div>
+                            <div id="urlChar" style="display: none;">
+                                <input type="text" id="charAvatarUrl" placeholder="Enter Bot image URL" class="avatar-url">
+                            </div>
+
+                            <!-- Credits Section -->
+                            <div class="credits">
+                                developed by Berry The Light
+                                <br>
+                                <a href='https://ko-fi.com/N4N514G8PX' target='_blank'>
+                                    <img height='36' style='border:0px;height:36px; padding:0px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+                                </a>
+								</br> Bug report / suggestions : motivatedberry@gmail.com
+                            </div>
+
+                            <!-- Avatar Preview Section -->
+                            <div id="avatarOptions" style="display: none;">
+                                <div class="user-avatar-container" style="display: none;" id="userAvatarContainer"></div>
+                                <div class="char-avatar-container" style="display: none;" id="charAvatarContainer"></div>
+                            </div>
+
+                        </div> <!-- End of Operation Area -->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End of toggle wrapper -->
+
+        <!-- Export Section -->
+        <div class="menu-toggle2" id="menuToggle2">
+            <a href="#" class="export-button">
+                <img src="images/export.png" alt="Export" width="32" height="32" class="export-icon">
+                <img src="images/export-hover.png" alt="Export" width="32" height="32" class="hover-icon">
+            </a>
+            <div class="export-wrapper">
+                <div class="export-content">
+                    <p>Export as:</p>
+                    <div class="export-buttons">
+                        <button id="exportEpubButton">EPUB</button>
+                    </div>
+					<div class="export-buttons">
+                        <button id="exportTxtButton">TXT</button>
+                    </div>
+					<div class="export-buttons">
+                        <button id="exportMarkdownButton">MARKDOWN</button>
+                    </div>
+					<div class="export-buttons">
+                        <button id="exportSillyTavernButton">SillyTavern Chat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End of menu container -->
+	
+		<div class="updates-container fade-in fade-in-delay-1" id="updates-anno">
+			<div class="updates-wrapper" id="updates-wrapper">
+					<div class="updates-content" id="updates-content">
+						<h1>📢 What's New in Version 1.6.3 <br> 
+						<h3> Export buttons are now directly available on JanitorAI Chat Page!<br> 
+						<p> ⭐ A seamless, one-click solution to export your chats in TXT, Markdown, EPUB & SillyTavern Chat Format!<br> 
+						<p>
+						<p>💜 Thank you for using this tool! If you find it useful, please consider <a href="https://chromewebstore.google.com/detail/janitorai-chat-downloader/agcmemnhmffojajaaoloemjndnbijmam">leaving a review </a> on Google Chrome store, or buying a <a href="https://ko-fi.com/berrythelight">coffee</a> for the developer 💜</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+
+    <!-- Chat Window Section -->
+		<div class="wrapper">
+			<div class="janitorai-chat-wrap fade-in fade-in-delay-2">
+				<div class="scroll-container">
+					<div id="messageArea">
+					<textarea id="markdown-editor">
+						<!-- Chat Message here -->
+						</textarea>
+					</div>
+				</div>
+				<div class="custom-scrollbar"></div>
+			</div>
+		</div>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
